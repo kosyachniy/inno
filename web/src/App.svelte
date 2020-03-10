@@ -15,8 +15,13 @@
 				marquee.classList.remove('marquee');
 				void marquee.offsetWidth;
 				marquee.classList.add('marquee');
-			}, 7000);
+			}, 5000);
 		}
+	}
+
+	$: if (startText === '') {
+		let hint = document.getElementsByClassName('hint')[0];
+		hint.classList.remove('active');
 	}
 </script>
 
@@ -39,14 +44,13 @@
 		</h2>
 		<br />
 
-		<div class="hint">
+		<div class="hint active">
 			↑<br />
 			Здесь ты можешь написать запрос
 		</div>
 	{:else}
 		<button on:click={move}>Generate</button>
 	{/if}
-	{history.join(' -> ')}
 </main>
 
 <style>
@@ -88,9 +92,9 @@
 
 	h2 {
 		opacity: 0;
-		animation: show 1.5s 1;
+		animation: show 2.8s 1;
 		animation-fill-mode: forwards;
-		animation-delay: .3s;
+		animation-delay: 1.7s;
 	}
 
 	@keyframes show {
@@ -117,16 +121,22 @@
 	.hint {
 		font-size: 18px;
 		opacity: 0;
-		animation: hint 4s 1;
+	}
+
+	.hint.active {
+		animation: hint 2.7s infinite;
 		animation-fill-mode: forwards;
-		animation-delay: 6s;
+		animation-delay: 7s;
 	}
 
 	@keyframes hint {
 		0% {
 			opacity: 0;
 		}
-		50% {
+		55% {
+			opacity: 1;
+		}
+		70% {
 			opacity: 1;
 		}
 		100% {
