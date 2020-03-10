@@ -1,13 +1,13 @@
 <script>
-	let history = [];
+	let status = 0;
 	let header = 'Это приложение без кнопок';
 	let startText = 'Я покажу тебе инновационный интерфейс';
 
-	function move() {
-		history = [...history, 'new'];
+	function start () {
+		status = 1;
 	}
 
-	$: if (history.length) {
+	$: if (status) {
 		if (header !== 'Логотип') {
 			setTimeout(() => {
 				header = 'Логотип';
@@ -15,7 +15,7 @@
 				marquee.classList.remove('marquee');
 				void marquee.offsetWidth;
 				marquee.classList.add('marquee');
-			}, 5000);
+			}, 4800);
 		}
 	}
 
@@ -26,7 +26,11 @@
 </script>
 
 <main>
-	{#if history.length}
+	{#if status === 0}
+		<div class="start">
+			<button on:mouseenter={start}>Привет!</button>
+		</div>
+	{:else if status === 1}
 		<h1>
 			<div class="marquee">{header}</div>
 			<div class="over-marquee">&nbsp;</div>
@@ -49,13 +53,40 @@
 			Здесь ты можешь написать запрос
 		</div>
 	{:else}
-		<button on:click={move}>Generate</button>
+		Опасный раздел!
 	{/if}
 </main>
 
 <style>
 	main {
 		padding: 8px;
+	}
+
+	.start {
+		position: fixed;
+		top: 0;
+		left: 0;
+		text-align: center;
+		width: 100vw;
+		height: 100vh;
+		cursor: pointer;
+		line-height: 100vh;
+	}
+
+	.start button {
+		padding: 15px 25px;
+		border: 2px solid #333;
+		border-radius: 15px;
+		width: 20vw;
+		min-width: 50px;
+		font-size: 1.65rem;
+		font-weight: 420;
+		background-color: #fff;
+		cursor: pointer;
+		box-shadow:
+			0 1px 4px rgba(0, 0, 0, .3),
+			-23px 0 20px -23px rgba(0, 0, 0, .8),
+			13px 0 20px -23px rgba(0, 0, 0, .8);
 	}
 
 	h1 {
@@ -112,7 +143,7 @@
 	}
 
 	.space {
-		border: 1.5px solid #000;
+		border: 1.5px solid #333;
 		border-radius: 9px;
 		padding: 3px 11px 5px 11px;
 		font-weight: normal;
@@ -126,7 +157,7 @@
 	.hint.active {
 		animation: hint 2.7s infinite;
 		animation-fill-mode: forwards;
-		animation-delay: 7s;
+		animation-delay: 6.8s;
 	}
 
 	@keyframes hint {
