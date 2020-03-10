@@ -8,9 +8,15 @@
 	}
 
 	$: if (history.length) {
-		setTimeout(() => {
-			header = 'Логотип.';
-		}, 7000);
+		if (header !== 'Логотип') {
+			setTimeout(() => {
+				header = 'Логотип';
+				let marquee = document.getElementsByClassName('marquee')[0];
+				marquee.classList.remove('marquee');
+				void marquee.offsetWidth;
+				marquee.classList.add('marquee');
+			}, 7000);
+		}
 	}
 </script>
 
@@ -18,6 +24,7 @@
 	{#if history.length}
 		<h1>
 			<div class="marquee">{header}</div>
+			<div class="over-marquee">&nbsp;</div>
 		</h1>
 
 		<h2>
@@ -50,13 +57,24 @@
 	h1 {
 		width: 100%;
 		margin-bottom: 9px;
+		font-weight: 700;
+		height: 38px;
 	}
 
 	.marquee {
 		width: 100%;
 		text-indent: 0;
-		animation: marquee 1.7s linear 1;
+		animation: marquee 1.1s ease-in-out 1;
 		animation-fill-mode: forwards;
+	}
+
+	.over-marquee {
+		position: absolute; /* relative */
+		width: 100%;
+		height: 38px;
+		top: 8px; /* -38px; */
+		left: 8px;
+		box-shadow: -500px 0 100px -100px #fff inset;
 	}
 
 	@keyframes marquee {
