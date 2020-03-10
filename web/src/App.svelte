@@ -2,6 +2,7 @@
 	let status = 0;
 	let header = 'Это приложение без кнопок';
 	let startText = 'Я покажу тебе инновационный интерфейс';
+	let clear = false;
 
 	function start () {
 		status = 1;
@@ -20,8 +21,20 @@
 	}
 
 	$: if (startText === '') {
+		clear = true;
+
 		let hint = document.getElementsByClassName('hint')[0];
 		hint.classList.remove('active');
+	}
+
+	$: if (clear && startText.length > 0) {
+		// let space = document.getElementsByClassName('space')[0];
+		// space.classList.remove('unvisible');
+		// space.innerHTML = '<div class="loading">123</div>';
+		let loading = document.getElementsByClassName('loading')[0];
+		loading.classList.remove('unvisible');
+		let text = document.getElementsByClassName('text')[0];
+		text.innerHTML = '';
 	}
 </script>
 
@@ -43,7 +56,8 @@
 				size={Math.max(startText.length, 2)}
 			/>
 			<div class="space">
-				Пустой блок
+				<div class="loading unvisible"></div>
+				<div class="text">Пустой блок</div>
 			</div>
 		</h2>
 		<br />
@@ -74,11 +88,11 @@
 	}
 
 	.start button {
-		padding: 15px 25px;
+		padding: 20px 25px;
 		border: 2px solid #333;
 		border-radius: 15px;
 		width: 20vw;
-		min-width: 50px;
+		min-width: 250px;
 		font-size: 1.65rem;
 		font-weight: 420;
 		background-color: #fff;
@@ -147,6 +161,7 @@
 		border-radius: 9px;
 		padding: 3px 11px 5px 11px;
 		font-weight: normal;
+		min-width: 2rem;
 	}
 
 	.hint {
@@ -157,7 +172,7 @@
 	.hint.active {
 		animation: hint 2.7s infinite;
 		animation-fill-mode: forwards;
-		animation-delay: 6.8s;
+		animation-delay: 6.9s;
 	}
 
 	@keyframes hint {
@@ -173,5 +188,57 @@
 		100% {
 			opacity: 0;
 		}
+	}
+
+	.unvisible {
+		display: none;
+	}
+
+	/* Загрузка */
+
+	.loading {
+		position: relative;
+		top: -1.4rem;
+	}
+
+	.loading:after, .loading:before {
+		content: "";
+		border-radius: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 1.8rem; /* 100%; */
+		height: 1.8rem; /* 100%; */
+		transform-origin: center center;
+	}
+
+	.loading:before {
+		box-shadow:
+			inset 0 5px 0 rgba(0, 250, 250, 0.6),
+			inset 5px 0 0 rgba(0, 200, 200, 0.6),
+			inset 0 -5px 0 rgba(0, 150, 200, 0.6),
+			inset -5px 0 0 rgba(0, 200, 250, 0.6);
+		animation: rotate-before 2s -0.5s linear infinite;
+	}
+
+	.loading:after {
+		box-shadow:
+			inset 0 5px 0 rgba(250, 250, 0, 0.6),
+			inset 5px 0 0 rgba(250, 200, 0, 0.6),
+			inset 0 -5px 0 rgba(250, 150, 0, 0.6),
+			inset -5px 0 0 rgba(250, 100, 0, 0.6);
+		animation: rotate-after 2s -0.5s linear infinite;
+	}
+
+	@keyframes rotate-after {
+		0% {transform: rotateZ(0deg) scaleX(1) scaleY(1);}
+		50% {transform: rotateZ(180deg) scaleX(0.82) scaleY(0.95);}
+		100% {transform: rotateZ(360deg) scaleX(1) scaleY(1);}
+	}
+
+	@keyframes rotate-before {
+		0% {transform: rotateZ(0deg) scaleX(1) scaleY(1);}
+		50% {transform: rotateZ(-180deg) scaleX(0.95) scaleY(0.85);}
+		100% {transform: rotateZ(-360deg) scaleX(1) scaleY(1);}
 	}
 </style>
