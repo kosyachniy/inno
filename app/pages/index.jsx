@@ -4,7 +4,7 @@ export default () => {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_URL}api/`, {
+        fetch('/api/', {
             method: 'POST',
             body: JSON.stringify({foo: 'bar'}),
             headers: {

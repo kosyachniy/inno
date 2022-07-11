@@ -7,7 +7,7 @@ check:
 	curl http://localhost:${APP_PORT}/
 
 set:
-	export APP_PORT=${APP_PORT} API_PORT=${API_PORT}; \
-	envsubst '$${APP_PORT} $${API_PORT}' < nginx.conf > /etc/nginx/sites-enabled/${NAME}.conf
+	export APP_PORT=${APP_PORT} API_PORT=${API_PORT} HOST=${HOST}; \
+	envsubst '$${APP_PORT} $${API_PORT} $${HOST}' < nginx.conf > /etc/nginx/sites-enabled/${NAME}.conf
 	sudo systemctl restart nginx
 	sudo certbot --nginx
