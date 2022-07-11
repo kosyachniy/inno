@@ -1,13 +1,13 @@
-NAME := inno
+include .env
 
 run:
-	sudo docker-compose -p $(NAME) up --build
+	sudo docker-compose -p ${NAME} up --build
 
 check:
-	curl -X POST -H "Content-Type: application/json" -d '{"foo": "bar"}' http://localhost:8123/
+	curl http://localhost:${APP_PORT}/
 
 set:
-	rm -f /etc/nginx/sites-enabled/$(NAME).conf
-	cp nginx.conf /etc/nginx/sites-enabled/$(NAME).conf
+	rm -f /etc/nginx/sites-enabled/${NAME}.conf
+	cp nginx.conf /etc/nginx/sites-enabled/${NAME}.conf
 	sudo systemctl restart nginx
 	sudo certbot --nginx
