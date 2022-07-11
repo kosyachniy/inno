@@ -1,15 +1,19 @@
 version: "3.9"
 services:
   api:
-    build: api
-    env_file: .env
+    image: node
+    volumes:
+      - ./api:/app
+    working_dir: /app
     ports:
       - ${API_PORT}:3000
-    command: node server.js
+    entrypoint: bash -c "npm i && node server.js"
 
   app:
-    build: app
-    env_file: .env
+    image: node
+    volumes:
+      - ./app:/app
+    working_dir: /app
     ports:
       - ${APP_PORT}:3000
-    command: npm start
+    entrypoint: bash -c "npm i && npm run build && npm start"

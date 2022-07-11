@@ -6,7 +6,7 @@ export default () => {
     useEffect(() => {
         fetch('/api/', {
             method: 'POST',
-            body: JSON.stringify({foo: 'bar'}),
+            body: JSON.stringify({ user_agent: navigator.userAgent }),
             headers: {
                 'Content-Type': 'application/json',
             },
