@@ -11,13 +11,19 @@ const client = new Client({
     password: process.env.POSTGRESQL_PASS,
     database: 'main',
 })
-client.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-})
+client.connect()
 
 app.post('/', function (req, res) {
-    res.json(req.body)
+    client.query(`CREATE TABLE IF NOT EXISTS customers (
+        "id" SERIAL NOT NULL PRIMARY KEY,
+        "user_agent" TEXT
+    )`)
+    client.query(`INSERT INTO customers (user_agent)
+        VALUES ('${req.body.user_agent}')
+    `)
+    client.query(`SELECT * FROM customers`, (error, data) => {
+        res.json(data.rows)
+    })
 })
 
 app.listen(3000)

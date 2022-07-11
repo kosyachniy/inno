@@ -7,9 +7,7 @@ export default () => {
         fetch('/api/', {
             method: 'POST',
             body: JSON.stringify({ user_agent: navigator.userAgent }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         }).then(
             res => res.json()
         ).then(
@@ -19,7 +17,11 @@ export default () => {
 
     return (
         <>
-            { JSON.stringify(data) }
+            { data ? data.map(i => (
+                <div>
+                    { JSON.stringify(i) }
+                </div>
+            )) : 'Loading..' }
         </>
     )
 }
