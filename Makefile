@@ -2,7 +2,7 @@ include .env
 
 run:
 	mkdir -p data >/dev/null 2>&1
-	sudo docker-compose -p ${NAME} up --build
+	docker-compose -p ${NAME} up --build
 
 check:
 	curl http://localhost:${APP_PORT}/

@@ -4,7 +4,7 @@ export default () => {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-        fetch('/api/', {
+        fetch(process.env.NEXT_PUBLIC_SERVER, {
             method: 'POST',
             body: JSON.stringify({ user_agent: navigator.userAgent }),
             headers: { 'Content-Type': 'application/json' },

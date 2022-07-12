@@ -26,6 +26,8 @@ services:
 
   app:
     image: node
+    environment:
+      - NEXT_PUBLIC_SERVER=http://localhost:${API_PORT}/
     volumes:
       - ./app:/app
     working_dir: /app
