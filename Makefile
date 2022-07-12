@@ -1,7 +1,6 @@
 include .env
 
 run:
-	mkdir -p data >/dev/null 2>&1
 	docker-compose -p ${NAME} up --build
 
 check:

@@ -22,15 +22,17 @@ services:
       - ${API_PORT}:3000
     depends_on:
       - db
+    restart: on-failure:10
     entrypoint: bash -c "npm i && node server.js"
 
   app:
     image: node
     environment:
-      - NEXT_PUBLIC_SERVER=http://localhost:${API_PORT}/
+      - NEXT_PUBLIC_SERVER=${SERVER}
     volumes:
       - ./app:/app
     working_dir: /app
     ports:
       - ${APP_PORT}:3000
+    restart: on-failure:3
     entrypoint: bash -c "npm i && npm run build && npm start"
