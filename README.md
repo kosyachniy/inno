@@ -32,4 +32,4 @@ HOST=subdomain.domain.com
         </tr>
     </tbody>
 </table>
-2. ` make run `
+2. <code> make run </code>

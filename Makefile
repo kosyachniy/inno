@@ -1,7 +1,13 @@
 include .env
 
 run:
-	docker-compose -p ${NAME} up --build
+	docker-compose -p ${NAME} up --build -d
+
+stop:
+	docker-compose stop
+
+logs:
+	docker-compose logs -t -f --tail 10
 
 check:
 	curl http://localhost:${APP_PORT}/
