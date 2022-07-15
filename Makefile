@@ -1,7 +1,9 @@
 include .env
 
 run:
+	make stop
 	docker-compose -p ${NAME} up --build -d
+	make logs
 
 stop:
 	docker-compose stop

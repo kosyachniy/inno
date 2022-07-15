@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useStyles } from '../src/styles'
 
 export default () => {
+	const { classes } = useStyles({})
     const [data, setData] = useState(null)
 
     useEffect(() => {
@@ -22,6 +24,9 @@ export default () => {
                     { JSON.stringify(i) }
                 </div>
             )) : 'Loading..' }
+            <button className={ classes.actionButton }>
+                Go
+            </button>
         </>
     )
 }
