@@ -1,7 +1,11 @@
 include .env
 
+dev:
+	export MODE=LOCAL; \
+	docker-compose -p ${NAME} up --build
+
 run:
-	make stop
+	export MODE=PROD; \
 	docker-compose -p ${NAME} up --build -d
 	make logs
 
