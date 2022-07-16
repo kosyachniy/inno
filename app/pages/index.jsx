@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useStyles } from '../src/styles'
+
+import styles from '../styles/base.module.css'
 
 export default () => {
-	const { classes } = useStyles({})
     const [data, setData] = useState(null)
 
     useEffect(() => {
@@ -19,12 +19,14 @@ export default () => {
 
     return (
         <>
-            { data ? data.map(i => (
-                <div>
-                    { JSON.stringify(i) }
-                </div>
-            )) : 'Loading..' }
-            <button className={ classes.actionButton }>
+            <div className={ styles.box }>
+                { data ? data.map(i => (
+                    <div>
+                        { JSON.stringify(i) }
+                    </div>
+                )) : 'Loading..' }
+            </div>
+            <button className={ styles.button }>
                 Go
             </button>
         </>
