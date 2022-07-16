@@ -19,6 +19,7 @@ export default () => {
 
     return (
         <>
+            <input className={ styles.search } placeholder="🔍 Search" />
             <div className={ styles.box }>
                 { data ? data.map(i => (
                     <div>
