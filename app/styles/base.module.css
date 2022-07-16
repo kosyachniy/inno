@@ -1,31 +1,41 @@
 .box,
 .button,
-.search {
+.search,
+.filters {
     width: 100%;
     margin-top: 30px;
+}
+
+.box,
+.button,
+.search,
+.filters * {
     border: 0;
     border-radius: 10px;
 }
 
+.button,
+.search,
+.filters * {
+    height: 54px;
+    font-size: 24px;
+}
+
 .box,
-.search {
-    padding: 20px;
+.search,
+.filters * {
+    padding: 0 20px;
     box-shadow: 0 .25rem 1.5rem rgba(0, 0, 0, .12);
     transition-duration: 0.3s;
     transition-property: box-shadow;
     transition-timing-function: ease-in-out;
 }
 
-.button,
-.search {
-    height: 54px;
-    font-size: 24px;
-}
-
 .box:hover,
 .search:hover,
 .search:focus,
-.search:active {
+.search:active,
+.filters *:hover {
     box-shadow: 0 .75rem 2.25rem rgba(0, 0, 0, .2);
 }
 
@@ -34,24 +44,39 @@
     margin-top: 20px;
 }
 
+.box:first-child,
+.filters:first-child {
+    margin-top: 10px;
+}
+
 .box {
+    padding: 20px;
     background-size: cover;
     background-position: center center;
 }
 
-.box:first-child {
-    margin-top: 10px;
-}
-
-.button {
+.button,
+.active {
     background-color: #fde000;
     cursor: pointer;
 }
 
-.button:hover {
+.button:hover,
+.active:hover {
     background-color: #eed500;
 }
 
-.search {
-    font-size: 25px;
+.filters {
+    display: inline-block;
+    /* overflow-x: scroll; */
+}
+
+.filters * {
+    margin-left: 15px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.filters *:first-child {
+    margin-left: 0;
 }
