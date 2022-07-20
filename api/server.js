@@ -14,17 +14,28 @@ const db = new Client({
     database: 'main',
 })
 db.connect()
+db.query(`CREATE TABLE IF NOT EXISTS users (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "token" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "ip" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[]
+)`)
 
 app.post('/', function (req, res) {
-    db.query(`CREATE TABLE IF NOT EXISTS customers (
-        "id" SERIAL NOT NULL PRIMARY KEY,
-        "user_agent" TEXT
-    )`)
-    db.query(`INSERT INTO customers (user_agent)
-        VALUES ('${req.body.user_agent}')
-    `)
-    db.query(`SELECT * FROM customers`, (error, data) => {
-        res.json(data.rows)
+    const token = req.body.token
+    const ip = req.headers['x-real-ip']
+
+    db.query(`SELECT * FROM users WHERE token @> '{"${token}"}'`, (error, data) => {
+        if (data.rows.length) {
+            res.json(data.rows[0])
+        } else {
+            db.query(`INSERT INTO users (token, ip)
+                VALUES ('{"${token}"}', '{"${ip}"}')
+            `, (error, data) => {
+                db.query(`SELECT * FROM users WHERE token @> '{"${token}"}'`, (error, data) => {
+                    res.json(data.rows[0])
+                })
+            })
+        }
     })
 })
 
