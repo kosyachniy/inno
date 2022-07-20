@@ -28,12 +28,11 @@ app.post('/', function (req, res) {
         if (data.rows.length) {
             res.json(data.rows[0])
         } else {
-            db.query(`INSERT INTO users (token, ip)
-                VALUES ('{"${token}"}', '{"${ip}"}')
+            db.query(`INSERT INTO users (token${ ip ? ', ip' : '' })
+                VALUES ('{"${token}"}'${ ip ? ', \'{"' + ip + '"}\'' : '' })
+                RETURNING *
             `, (error, data) => {
-                db.query(`SELECT * FROM users WHERE token @> '{"${token}"}'`, (error, data) => {
-                    res.json(data.rows[0])
-                })
+                res.json(data.rows[0])
             })
         }
     })

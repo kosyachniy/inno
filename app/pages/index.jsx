@@ -45,6 +45,7 @@ export default () => {
                 { Object.entries(filters).map(([k, v]) => (
                     <button
                         className={ v ? styles.active : "" }
+                        key={ k }
                         onClick={
                             () => {setFilters({
                                 ...filters,
