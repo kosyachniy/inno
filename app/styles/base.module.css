@@ -67,8 +67,10 @@
 }
 
 .filters {
-    display: inline-block;
-    /* overflow-x: scroll; */
+    margin: 0 0 -30px -15px;
+    padding: 30px 0 30px 15px;
+    display: flex;
+    overflow-x: scroll;
 }
 
 .filters * {
