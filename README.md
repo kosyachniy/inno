@@ -13,6 +13,7 @@
             <td>
                 <pre>
 NAME=proj_name
+MODE=local
 API_PORT=8123
 APP_PORT=8987
 POSTGRESQL_PASS=password
@@ -22,6 +23,7 @@ SERVER=http://localhost:8123/
             <td>
                 <pre>
 NAME=proj_name
+MODE=prod
 API_PORT=8123
 APP_PORT=8987
 POSTGRESQL_PASS=password

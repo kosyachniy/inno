@@ -1,13 +1,13 @@
 include .env
 
-dev:
-	export MODE=LOCAL; \
-	docker-compose -p ${NAME} up --build
-
 run:
-	export MODE=PROD; \
-	docker-compose -p ${NAME} up --build -d
-	make logs
+	if [[ ${MODE} == local ]]; \
+	then \
+		docker-compose -p ${NAME} up --build; \
+	else \
+		docker-compose -p ${NAME} up --build -d; \
+		make logs; \
+	fi
 
 stop:
 	docker-compose stop

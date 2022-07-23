@@ -37,7 +37,7 @@ services:
     restart: on-failure:3
     entrypoint: >
       bash -c "
-        if [[ $MODE == LOCAL ]]
+        if [[ $MODE == local ]]
         then
           npm i && npm run dev
         else
