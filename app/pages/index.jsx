@@ -53,6 +53,11 @@ export default () => {
                     >{ k }</button>
                 )) }
             </div>
+            <div className={ styles.cards }>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <div className={ styles.box }>
                 { data ? (
                     <div>

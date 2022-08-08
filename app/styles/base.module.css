@@ -1,7 +1,8 @@
 .box,
 .button,
 .search,
-.filters {
+.filters,
+.cards {
     width: 100%;
     margin-top: 30px;
 }
@@ -9,7 +10,8 @@
 .box,
 .button,
 .search,
-.filters * {
+.filters *,
+.cards * {
     border: 0;
     border-radius: 10px;
 }
@@ -23,7 +25,8 @@
 
 .box,
 .search,
-.filters * {
+.filters *,
+.cards * {
     padding: 0 20px;
     box-shadow: 0 .25rem 1.5rem rgba(0, 0, 0, .12);
     transition-duration: 0.3s;
@@ -35,7 +38,8 @@
 .search:hover,
 .search:focus,
 .search:active,
-.filters *:hover {
+.filters *:hover,
+.cards *:hover {
     box-shadow: 0 .75rem 2.25rem rgba(0, 0, 0, .2);
 }
 
@@ -49,6 +53,13 @@
     margin-top: 10px;
 }
 
+.filters *,
+.cards * {
+    margin-left: 15px;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
 .box {
     padding: 20px;
     background-size: cover;
@@ -57,28 +68,47 @@
 
 .button,
 .active {
-    background-color: #fde000;
+    background-color: #fedd2c;
     cursor: pointer;
 }
 
 .button:hover,
 .active:hover {
-    background-color: #eed500;
+    background-color: #ffcc33;
 }
 
 .filters {
+    width: calc(100% + 15px);
     margin: 0 0 -30px -15px;
     padding: 30px 0 30px 15px;
     display: flex;
     overflow-x: scroll;
 }
 
-.filters * {
-    margin-left: 15px;
-    padding: 0 20px;
-    cursor: pointer;
-}
-
 .filters *:first-child {
     margin-left: 0;
+}
+
+.cards {
+    width: calc(100% + 15px);
+    margin: 15px 0 0 -15px;
+}
+
+.cards * {
+    height: 240px;
+    width: calc(100% / 3 - 15px);
+    margin-top: 15px;
+    display: inline-block;
+}
+
+@media (max-width: 1000px) {
+    .cards * {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 750px) {
+    .cards * {
+        width: calc(100% - 15px);
+    }
 }
