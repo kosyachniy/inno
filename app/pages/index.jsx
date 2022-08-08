@@ -32,9 +32,7 @@ export default () => {
             body: JSON.stringify({ token }),
             headers: { 'Content-Type': 'application/json' },
         }).then(
-            res => res.json()
-        ).then(
-            res => setData(res)
+            async res => setData(await res.json())
         )
     }, [])
 

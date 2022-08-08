@@ -20,7 +20,7 @@ db.query(`CREATE TABLE IF NOT EXISTS users (
     "ip" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[]
 )`)
 
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
     const token = req.body.token
     const ip = req.headers['x-real-ip']
 

@@ -13,6 +13,11 @@ a {
 * {
     box-sizing: border-box;
     outline: none;
+    color: #000;
+}
+
+input {
+    appearance: none;
 }
 
 button {
