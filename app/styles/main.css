@@ -3,6 +3,7 @@ body {
     padding: 0 15px 15px 15px;
     margin: 0;
     font-family: "YS Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
 }
 
 a {
@@ -14,6 +15,7 @@ a {
     box-sizing: border-box;
     outline: none;
     color: #000;
+    word-wrap: break-word;
 }
 
 input {
