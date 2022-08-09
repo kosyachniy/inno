@@ -34,6 +34,20 @@
     transition-timing-function: ease-in-out;
 }
 
+.button,
+.search,
+.filters *,
+.cards * {
+    transition: all .3s cubic-bezier(0, 0, .5, 1);
+}
+
+.button:hover,
+.search:hover,
+.filters *:hover,
+.cards *:hover {
+    transform: scale3d(1.01, 1.01, 1.01);
+}
+
 .box:hover,
 .search:hover,
 .search:focus,
@@ -99,6 +113,12 @@
     width: calc(100% / 3 - 15px);
     margin-top: 15px;
     display: inline-block;
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 240px;
+    color: #fff;
 }
 
 @media (max-width: 1000px) {

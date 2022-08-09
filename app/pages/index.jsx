@@ -2,17 +2,24 @@ import { useState, useEffect } from 'react'
 
 import styles from '../styles/base.module.css'
 
+const dataFilters = [
+    'currencies',
+    'crypto',
+    'stocks',
+    'commodities',
+    'etfs',
+    'funds',
+    'bonds',
+]
+const dataCards = [
+    {'title': 'Sunrise', 'image': 'https://farm6.staticflickr.com/5607/15374495498_db6e120f6c_b.jpg'},
+    {'title': 'Sunset', 'image': 'https://proprikol.ru/wp-content/uploads/2020/09/kartinki-los-andzheles-45.jpg'},
+    {'title': 'Darkness', 'image': 'https://pibig.info/uploads/posts/2021-12/1639642159_79-pibig-info-p-nochnie-gori-priroda-krasivo-foto-87.jpg'},
+]
+
 export default () => {
     const [data, setData] = useState(null)
-    const [filters, setFilters] = useState({
-        currencies: false,
-        crypto: false,
-        stocks: false,
-        commodities: false,
-        etfs: false,
-        funds: false,
-        bonds: false,
-    })
+    const [filters, setFilters] = useState(Object.fromEntries(dataFilters.map((f) => [f, false])))
 
     useEffect(() => {
         let token = localStorage.getItem('token')
@@ -54,9 +61,14 @@ export default () => {
                 )) }
             </div>
             <div className={ styles.cards }>
-                <div></div>
-                <div></div>
-                <div></div>
+                { dataCards.map((v, k) =>
+                    <div
+                        key={ k }
+                        style={{ backgroundImage: `url(${v.image})` }}
+                    >
+                        { v.title }
+                    </div>
+                ) }
             </div>
             <div className={ styles.box }>
                 { data ? (
