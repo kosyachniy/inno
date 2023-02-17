@@ -1,19 +1,16 @@
 include .env
 
+dev:
+	docker compose -p ${NAME} up --build
+
 run:
-	if [[ ${MODE} == local ]]; \
-	then \
-		docker-compose -p ${NAME} up --build; \
-	else \
-		docker-compose -p ${NAME} up --build -d; \
-		make logs; \
-	fi
+	docker compose -f compose.prod.yml -p ${NAME} up --build -d
 
 stop:
-	docker-compose stop
+	docker compose stop
 
 logs:
-	docker-compose logs -t -f --tail 10
+	docker compose logs -t -f --tail 10
 
 check:
 	curl http://localhost:${APP_PORT}/
