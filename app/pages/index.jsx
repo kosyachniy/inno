@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import styles from '../styles/base.module.css'
-
 const dataFilters = [
     'currencies',
     'crypto',
@@ -45,11 +43,11 @@ export default () => {
 
     return (
         <>
-            <input className={ styles.search } placeholder="🔍 Search" />
-            <div className={ styles.filters }>
+            <input className="search" placeholder="🔍 Search" />
+            <div className="filters">
                 { Object.entries(filters).map(([k, v]) => (
                     <button
-                        className={ v ? styles.active : "" }
+                        className={ v ? "active" : "" }
                         key={ k }
                         onClick={
                             () => {setFilters({
@@ -60,7 +58,7 @@ export default () => {
                     >{ k }</button>
                 )) }
             </div>
-            <div className={ styles.cards }>
+            <div className="cards">
                 { dataCards.map((v, k) =>
                     <div
                         key={ k }
@@ -70,15 +68,29 @@ export default () => {
                     </div>
                 ) }
             </div>
-            <div className={ styles.box }>
+            <div className="box">
                 { data ? (
                     <div>
                         User #{ data.id }<br />
                         { JSON.stringify(data.token) }
                     </div>
                 ) : 'Loading..' }
+
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                </ul>
+
+                <textarea>
+                    text
+                </textarea>
+
+                <select>
+                    <option value="1">option 1</option>
+                    <option value="2">option 2</option>
+                </select>
             </div>
-            <button className={ styles.button }>
+            <button className="button">
                 Go
             </button>
         </>
