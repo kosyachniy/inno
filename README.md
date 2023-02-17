@@ -1,6 +1,5 @@
 # The App
 ## Run
-1. Configure `.env`
 <table>
     <thead>
         <tr>
@@ -11,28 +10,31 @@
     <tbody>
         <tr>
             <td>
+                1. Configure `.env`
                 <pre>
 NAME=proj_name
 API_PORT=8123
-APP_PORT=8987
+WEB_PORT=8987
 POSTGRESQL_PASS=password
 SERVER=http://localhost:8123/
                 </pre>
+                2. <code>make dev</code>
             </td>
             <td>
+                1. Configure `.env`
                 <pre>
 NAME=proj_name
 API_PORT=8123
-APP_PORT=8987
+WEB_PORT=8987
 POSTGRESQL_PASS=password
 SERVER=/api/
 HOST=subdomain.domain.com
                 </pre>
+                2. <code>make run</code>
             </td>
         </tr>
     </tbody>
 </table>
-2. <code> make run </code>
 
 ## Vision
 1. Code best practices

@@ -1,5 +1,5 @@
 :root {
-    --bg: #fff; /* #f8f4f0 */
+    --bg: #fff;
     --back: #f8f4f0;
     --text: #000;
     --active: #fedd2c;
@@ -8,7 +8,7 @@
 
 body {
     min-width: 250px;
-    padding: 0 15px 15px 15px;
+    padding: 0 2rem 2rem 2rem;
     background-color: var(--bg);
     margin: 0;
     font-family: "YS Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -66,14 +66,18 @@ button {
 .button,
 .search,
 .filters,
+.boxes,
 .cards {
     width: 100%;
     margin-top: 30px;
 }
 
 .box,
+.button,
+.search,
 .filters *,
-.cards * {
+.boxes > div,
+.cards div {
     border: 0;
     border-radius: .75rem;
 }
@@ -82,13 +86,14 @@ button {
 .search,
 .filters * {
     height: 54px;
-    font-size: 24px;
+    font-size: 1.5em;
 }
 
 .box,
 .search,
 .filters *,
-.cards * {
+.boxes > div,
+.cards div {
     padding: 0 20px;
     box-shadow: 0 .25rem 1.5rem rgba(0, 0, 0, .12);
     transition-duration: 0.3s;
@@ -99,14 +104,16 @@ button {
 .button,
 .search,
 .filters *,
-.cards * {
+.boxes > div,
+.cards div {
     transition: all .3s cubic-bezier(0, 0, .5, 1);
 }
 
 .button:hover,
 .search:hover,
 .filters *:hover,
-.cards *:hover {
+.boxes > div:hover,
+.cards div:hover {
     transform: scale3d(1.01, 1.01, 1.01);
 }
 
@@ -115,7 +122,8 @@ button {
 .search:focus,
 .search:active,
 .filters *:hover,
-.cards *:hover {
+.boxes > div:hover,
+.cards div:hover {
     box-shadow: 0 .75rem 2.25rem rgba(0, 0, 0, .2);
 }
 
@@ -130,7 +138,8 @@ button {
 }
 
 .filters *,
-.cards * {
+.boxes > div,
+.cards div {
     margin-left: 15px;
     padding: 0 20px;
     cursor: pointer;
@@ -152,7 +161,63 @@ button {
 }
 
 .box textarea {
-    height: 16em;
+    height: 15em;
+}
+
+.boxes > div {
+    padding: 0;
+    width: calc(100% / 3 - 15px);
+    margin-top: 15px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.boxes > div > .image {
+    /* margin: 5px 0 5px 5px; */
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    vertical-align: top;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 10px 0 0 0;
+}
+
+.boxes .body {
+    padding: 10px 17px 5px 10px;
+    display: inline-block;
+    width: calc(100% - 100px);
+    vertical-align: top;
+}
+
+.boxes .title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.boxes .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: solid #e6e6e6 2px;
+    padding: 7px 5px 10px 5px;
+}
+
+.boxes .footer div {
+    display: flex;
+    align-items: center;
+}
+
+.boxes .footer .image {
+    background-size: cover;
+    background-position: center center;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 5px;
 }
 
 .button,
@@ -178,13 +243,15 @@ button {
     margin-left: 0;
 }
 
+.boxes,
 .cards {
     width: calc(100% + 15px);
     margin: 15px 0 0 -15px;
 }
 
-.cards * {
-    height: 240px;
+.cards div {
+    height: 15rem;
+    line-height: 15rem;
     width: calc(100% / 3 - 15px);
     margin-top: 15px;
     display: inline-block;
@@ -192,18 +259,19 @@ button {
     background-position: center center;
     text-align: center;
     font-size: 30px;
-    line-height: 240px;
     color: #fff;
 }
 
 @media (max-width: 1000px) {
-    .cards * {
+    .boxes > div,
+    .cards div {
         width: calc(50% - 15px);
     }
 }
 
 @media (max-width: 750px) {
-    .cards * {
+    .boxes > div,
+    .cards div {
         width: calc(100% - 15px);
     }
 }
