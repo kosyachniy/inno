@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+      PGDATA: /data/db
+      POSTGRES_DB: main
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 5432:5432
+
+  api:
+    image: node
+    env_file: .env
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    ports:
+      - ${API_PORT}:3000
+    depends_on:
+      - db
+    restart: on-failure:10
+    entrypoint: bash -c "npm i && node server.js"
+
+  app:
+    image: node
+    environment:
+      - NEXT_PUBLIC_SERVER=${SERVER}
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    ports:
+      - ${APP_PORT}:3000
+    restart: on-failure:3
+    entrypoint: >
+      bash -c "
+        if [[ $MODE == local ]]
+        then
+          npm i && npm run dev
+        else
+          npm i && npm run build && npm start
+        fi
+      "
