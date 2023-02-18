@@ -30,9 +30,9 @@
 		bonds: false,
 	}
 	let cards = [
-		{ title: 'Sunrise', image: 'https://farm6.staticflickr.com/5607/15374495498_db6e120f6c_b.jpg' },
-		{ title: 'Sunset', image: 'https://proprikol.ru/wp-content/uploads/2020/09/kartinki-los-andzheles-45.jpg' },
-		{ title: 'Darkness', image: 'https://pibig.info/uploads/posts/2021-12/1639642159_79-pibig-info-p-nochnie-gori-priroda-krasivo-foto-87.jpg' },
+		{ title: 'Sunrise', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/sunrise.jpg' },
+		{ title: 'Sunset', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/sunset.jpg' },
+		{ title: 'Darkness', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/darkness.jpg' },
 	]
 
 	async function api() {
@@ -82,16 +82,16 @@
 			{/if}
 		{:then data}
 			<div>
-				User #{ data.id }: { data.token.join(', ') }
+				@user{ data.id }
+				<ul class="tokens">
+					{#each data.token as token}
+						<li>{ token }</li>
+					{/each}
+				</ul>
 			</div>
 		{:catch error}
 			<p style="color: red">{ error.message }</p>
 		{/await}
-
-		<ul>
-			<li>1</li>
-			<li>2</li>
-		</ul>
 
 		<textarea>text</textarea>
 
@@ -104,3 +104,11 @@
 		Go
 	</button>
 </section>
+
+<style>
+	.tokens {
+		margin-top: 0;
+		padding-left: 1.5em;
+		list-style: '#';
+	}
+</style>

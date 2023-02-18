@@ -27,8 +27,6 @@ services:
 
   web:
     image: node
-    environment:
-      - NEXT_PUBLIC_SERVER=${SERVER}
     volumes:
       - ./web:/app
     working_dir: /app

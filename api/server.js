@@ -17,20 +17,17 @@ db.connect()
 db.query(`CREATE TABLE IF NOT EXISTS users (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "token" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
-    "ip" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[]
 )`)
 
 app.post('/', (req, res) => {
     const token = req.body.token
-    const ip = req.headers['x-real-ip']
 
     db.query(`SELECT * FROM users WHERE token @> '{"${token}"}'`, (error, data) => {
         if (data.rows.length) {
             res.json(data.rows[0])
         } else {
-            db.query(`INSERT INTO users (token${ ip ? ', ip' : '' })
-                VALUES ('{"${token}"}'${ ip ? ', \'{"' + ip + '"}\'' : '' })
-                RETURNING *
+            db.query(`
+                INSERT INTO users (token) VALUES ('{"${token}"}') RETURNING *
             `, (error, data) => {
                 res.json(data.rows[0])
             })
