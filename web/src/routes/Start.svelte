@@ -1,3 +1,8 @@
+<svelte:head>
+	<title>The App</title>
+	<meta name="description" content="The App" />
+</svelte:head>
+
 <script>
 	export let status;
 

@@ -25,12 +25,12 @@ services:
     restart: on-failure:10
     entrypoint: bash -c "npm i && node server.js"
 
-  app:
+  web:
     image: node
     environment:
       - NEXT_PUBLIC_SERVER=${SERVER}
     volumes:
-      - ./app:/app
+      - ./web:/app
     working_dir: /app
     ports:
       - ${WEB_PORT}:3000
