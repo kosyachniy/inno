@@ -35,4 +35,4 @@ services:
     ports:
       - ${WEB_PORT}:3000
     restart: on-failure:3
-    entrypoint: bash -c "npm i && npm run build && npm start"
+    entrypoint: bash -c "npm i && npm run build"
