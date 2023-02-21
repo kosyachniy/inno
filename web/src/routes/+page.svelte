@@ -1,25 +1,25 @@
 <script>
+	import { browser } from '$app/environment'
+	import Web3 from 'web3'
 	import { token } from '$lib/stores/token'
 
-	let dilters = [
-		{ key: 'currencies', value: false },
-		{ key: 'crypto', value: false },
-		{ key: 'stocks', value: false },
-		{ key: 'commodities', value: false },
-		{ key: 'etfs', value: false },
-		{ key: 'funds', value: false },
-		{ key: 'bonds', value: false },
-	]
-	let dataFilters = [
-		'currencies',
-		'crypto',
-		'stocks',
-		'commodities',
-		'etfs',
-		'funds',
-		'bonds',
-	]
-	let tilters = Object.fromEntries(dataFilters.map(((title) => [title, false])))
+	let account = null;
+	if (browser) {
+		if (typeof window.ethereum !== 'undefined') {
+			console.log(window.ethereum);
+
+			const web3 = new Web3(window.ethereum);
+			console.log(web3)
+
+			window.ethereum.request({ method: 'eth_requestAccounts' }).then(
+				accounts => account = accounts[0]
+			)
+			window.ethereum.on('accountsChanged', accounts => account = accounts[0])
+		} else {
+			console.log('MetaMask is not installed.');
+		}
+	}
+
 	let filters = {
 		currencies: false,
 		crypto: false,
@@ -74,6 +74,12 @@
 		{/each}
 	</div>
 	<div class="box">
+		{#if account}
+			{ account }
+		{:else}
+			Need to enable MetaMask
+		{/if}
+
 		{#await api()}
 			{#if $token}
 				{ $token }
