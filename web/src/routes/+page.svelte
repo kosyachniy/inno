@@ -3,12 +3,10 @@
 	import Web3 from 'web3'
 	import { token } from '$lib/stores/token'
 
-	let account = null;
+	let account = null
 	if (browser) {
 		if (typeof window.ethereum !== 'undefined') {
-			console.log(window.ethereum);
-
-			const web3 = new Web3(window.ethereum);
+			const web3 = new Web3(window.ethereum)
 			console.log(web3)
 
 			window.ethereum.request({ method: 'eth_requestAccounts' }).then(
@@ -16,7 +14,7 @@
 			)
 			window.ethereum.on('accountsChanged', accounts => account = accounts[0])
 		} else {
-			console.log('MetaMask is not installed.');
+			console.log('MetaMask is not installed.')
 		}
 	}
 
@@ -44,9 +42,9 @@
 		})
 
 		if (res.ok) {
-			return await res.json();
+			return await res.json()
 		} else {
-			throw new Error(await res.text());
+			throw new Error(await res.text())
 		}
 	}
 </script>
