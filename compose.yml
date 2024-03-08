@@ -19,7 +19,6 @@ services:
     volumes:
       - ./api:/app
       - ./db:/db
-    working_dir: /app
     ports:
       - ${API_PORT}:8080
     depends_on:
