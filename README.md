@@ -12,23 +12,24 @@
             <td>
                 1. Configure `.env`
                 <pre>
-NAME=proj_name
-API_PORT=8123
-WEB_PORT=8987
+NAME=inno
+API_PORT=8221
+WEB_PORT=80
 POSTGRESQL_PASS=password
-SERVER=http://localhost:8123/
+DATA_PATH=./data
+VITE_API_URL=http://localhost:8221/
                 </pre>
                 2. <code>make dev</code>
             </td>
             <td>
                 1. Configure `.env`
                 <pre>
-NAME=proj_name
-API_PORT=8123
-WEB_PORT=8987
+NAME=inno
+API_PORT=8221
+WEB_PORT=8222
 POSTGRESQL_PASS=password
-SERVER=/api/
-HOST=subdomain.domain.com
+DATA_PATH=~/data/inno
+VITE_API_URL=https://inno.chill.services/api/
                 </pre>
                 2. <code>make run</code>
             </td>

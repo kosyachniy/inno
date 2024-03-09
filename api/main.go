@@ -102,6 +102,5 @@ func main() {
     http.HandleFunc("/users/save/", saveUserHandler)
     http.HandleFunc("/users/get/", getUsersHandler)
 
-    fmt.Println("Server is running on port 8080")
-    log.Fatal(http.ListenAndServe(":8080", nil))
+    log.Fatal(http.ListenAndServe(":3000", nil))
 }

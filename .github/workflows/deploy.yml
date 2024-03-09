@@ -1,0 +1,54 @@
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Executing remote ssh command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH }}
+          script: |
+            echo "Stoping old version"
+            if [ -d ~/inno ];
+            then
+                cd ~/inno
+                make stop
+            fi
+
+            echo "Removing old version"
+            cd ~
+            rm -rf inno
+            # yes | sudo docker system prune -a
+
+            echo "Pulling new version"
+            GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git clone git@github.com:kosyachniy/inno.git
+
+            echo "Checking data directory"
+            if [ -d ~/data ];
+            then
+                echo ""
+            else
+                mkdir data
+            fi
+            if [ -d ~/data/inno ];
+            then
+                echo ""
+            else
+                cp -r ~/inno/data ~/data/inno
+            fi
+
+            echo "Copying keys"
+            cp ~/.secrets/inno.env ~/inno/.env
+
+            echo "Starting new version"
+            cd ~/inno
+            make run

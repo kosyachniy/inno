@@ -34,8 +34,7 @@
 	]
 
 	async function api() {
-		// TODO: process.env.NEXT_PUBLIC_SERVER
-		let res = await fetch('http://localhost:8123/users/save/', {
+		let res = await fetch(`${import.meta.env.VITE_API_URL}users/save/`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ id: 1, name: 'a1', email: $token }),
