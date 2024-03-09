@@ -13,7 +13,7 @@ logs:
 	docker compose logs -t -f --tail 10
 
 check:
-	curl http://localhost:${WEB_PORT}/
+	docker ps --filter name="^${NAME}"
 
 set:
 	export WEB_PORT=${WEB_PORT} API_PORT=${API_PORT} HOST=${HOST}; \

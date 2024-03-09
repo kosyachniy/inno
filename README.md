@@ -25,6 +25,7 @@ VITE_API_URL=http://localhost:8221/
                 1. Configure `.env`
                 <pre>
 NAME=inno
+HOST=inno.chill.services
 API_PORT=8221
 WEB_PORT=8222
 POSTGRESQL_PASS=password
