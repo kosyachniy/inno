@@ -14,6 +14,6 @@ WORKDIR /app
 COPY . .
 RUN go mod download
 
-RUN chmod +x entrypoint.sh
-ENTRYPOINT ["/app/entrypoint.sh"]
+# RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["air"]

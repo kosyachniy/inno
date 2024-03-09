@@ -28,17 +28,17 @@
 		bonds: false,
 	}
 	let cards = [
-		{ title: 'Sunrise', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/sunrise.jpg' },
-		{ title: 'Sunset', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/sunset.jpg' },
-		{ title: 'Darkness', image: 'https://tensy.s3.eu-central-1.amazonaws.com/sys/darkness.jpg' },
+		{ title: 'Sunrise', image: 'https://s3.chill.services/inno/prod/sunrise.jpg' },
+		{ title: 'Sunset', image: 'https://s3.chill.services/inno/prod/sunset.jpg' },
+		{ title: 'Darkness', image: 'https://s3.chill.services/inno/prod/darkness.jpg' },
 	]
 
 	async function api() {
 		// TODO: process.env.NEXT_PUBLIC_SERVER
-		let res = await fetch('http://localhost:8123/', {
+		let res = await fetch('http://localhost:8123/users/save/', {
 			method: 'POST',
-			body: JSON.stringify({ token: $token }),
 			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ id: 1, name: 'a1', email: $token }),
 		})
 
 		if (res.ok) {

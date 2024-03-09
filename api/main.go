@@ -46,20 +46,32 @@ func initDB() {
 }
 
 func saveUserHandler(w http.ResponseWriter, r *http.Request) {
+    // Set CORS headers
+    w.Header().Set("Access-Control-Allow-Origin", "*") // or your specific origin instead of *
+    w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+    w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+    // Pre-flight request handling
+    if r.Method == "OPTIONS" {
+        return
+    }
+
     var u User
     if err := json.NewDecoder(r.Body).Decode(&u); err != nil {
         http.Error(w, err.Error(), http.StatusBadRequest)
         return
     }
 
-    sqlStatement := `INSERT INTO users (name, email) VALUES ($1, $2)`
-    _, err := db.Exec(sqlStatement, u.Name, u.Email)
+    sqlStatement := `INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id`
+    err := db.QueryRow(sqlStatement, u.Name, u.Email).Scan(&u.ID)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusCreated)
+    json.NewEncoder(w).Encode(u)
 }
 
 func getUsersHandler(w http.ResponseWriter, r *http.Request) {
